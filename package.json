@@ -1,0 +1,38 @@
+{
+  "name": "ngx-eonasdan-datetimepicker",
+  "version": "1.0.0",
+  "description": "Angular 2 datetimepicker component",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "scripts": {
+    "pretest": "npm run build",
+    "build": "rm -rf dist && tsc",
+    "prepublish": "npm run build",
+    "build:prod": "rm -rf dist && node_modules/.bin/ngc -p tsconfig-aot.json"
+  },
+  "author": "Igor Tokarev <TigorC@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TigorC/ngx-eonasdan-datetimepicker.git"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": ">=4.17.22 <5.0.0"
+  },
+  "devDependencies": {
+    "@angular/core": "^4.0.0",
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "rxjs": "^5.0.1",
+    "zone.js": "^0.8.4",
+    "@types/eonasdan-bootstrap-datetimepicker": "^4.17.22",
+    "@types/jquery": "^2.0.34",
+    "typescript": "^2.0.0"
+  }
+}
