@@ -1,13 +1,13 @@
 {
   "name": "ngx-eonasdan-datetimepicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Angular 2 datetimepicker component",
-  "main": "index.js",
-  "typings": "index.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "pretest": "npm run build",
     "build": "rm -rf dist && tsc",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build:prod",
     "build:prod": "rm -rf dist && node_modules/.bin/ngc -p tsconfig-aot.json"
   },
   "author": "Igor Tokarev <TigorC@gmail.com>",
