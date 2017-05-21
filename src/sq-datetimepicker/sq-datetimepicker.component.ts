@@ -28,12 +28,12 @@ export const SQ_DATETIMEPICKER_VALIDATOR: any = {
   template: `
     <div [ngStyle]="style">
       <div class="sq-datetimepicker-input-group input-group date" [ngClass]="groupClass">
-        <input type="text" [ngClass]="inputClass"/>
+        <input type="text" [ngClass]="inputClass" [readOnly]="readOnly" />
         <span class="input-group-addon">
           <span [ngClass]="groupIconClass"></span>
         </span>
       </div>
-      <input type="text" class="sq-datetimepicker-input" [ngClass]="inputClass"/>
+      <input type="text" class="sq-datetimepicker-input" [ngClass]="inputClass" [readOnly]="readOnly"/>
       <div class="sq-datetimepicker-inline"></div>
     </div>`,
   providers: [SQ_DATETIMEPICKER_VALUE_ACCESSOR, SQ_DATETIMEPICKER_VALIDATOR]
@@ -45,6 +45,7 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
   @Input() inputClass: string = 'form-control';
   @Input() groupClass: string = '';
   @Input() groupIconClass: string = 'glyphicon glyphicon-calendar';
+  @Input() readOnly: boolean = false;
 
   @Output() dpChange: EventEmitter<ChangeEventObject> = new EventEmitter<ChangeEventObject>();
   @Output() dpError: EventEmitter<ErrorEventObject> = new EventEmitter<ErrorEventObject>();
