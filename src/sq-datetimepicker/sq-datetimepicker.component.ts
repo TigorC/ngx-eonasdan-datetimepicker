@@ -28,12 +28,12 @@ export const SQ_DATETIMEPICKER_VALIDATOR: any = {
   template: `
     <div [ngStyle]="style">
       <div class="sq-datetimepicker-input-group input-group date" [ngClass]="groupClass">
-        <input type="text" [ngClass]="inputClass" [readOnly]="readOnly" />
+        <input type="text" [ngClass]="inputClass" [readOnly]="readOnly" [placeholder]="placeholder"/>
         <span class="input-group-addon">
           <span [ngClass]="groupIconClass"></span>
         </span>
       </div>
-      <input type="text" class="sq-datetimepicker-input" [ngClass]="inputClass" [readOnly]="readOnly"/>
+      <input type="text" class="sq-datetimepicker-input" [ngClass]="inputClass" [readOnly]="readOnly" [placeholder]="placeholder" />
       <div class="sq-datetimepicker-inline"></div>
     </div>`,
   providers: [SQ_DATETIMEPICKER_VALUE_ACCESSOR, SQ_DATETIMEPICKER_VALIDATOR]
@@ -46,10 +46,12 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
   @Input() groupClass: string = '';
   @Input() groupIconClass: string = 'glyphicon glyphicon-calendar';
   @Input() readOnly: boolean = false;
+  @Input() placeholder: string = '';
 
   @Output() dpChange: EventEmitter<ChangeEventObject> = new EventEmitter<ChangeEventObject>();
   @Output() dpError: EventEmitter<ErrorEventObject> = new EventEmitter<ErrorEventObject>();
   @Output() dpHide: EventEmitter<HideEventObject> = new EventEmitter<HideEventObject>();
+  @Output() dpShow: EventEmitter<any> = new EventEmitter<any>();
   @Output() dpUpdate: EventEmitter<UpdateEventObject> = new EventEmitter<UpdateEventObject>();
 
   private parseError: boolean;
@@ -128,6 +130,7 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
 
   private bindEvents() {
     this.dpElement.on('dp.hide', (e: HideEventObject) => { this.dpHide.emit(e); });
+    this.dpElement.on('dp.show', () => { this.dpShow.emit(); });
     this.dpElement.on('dp.change', (e: ChangeEventObject) => {
       this.parseError = false;
       this.onChange(e.date || null);
