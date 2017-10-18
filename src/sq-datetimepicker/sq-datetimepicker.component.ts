@@ -70,7 +70,7 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.dpObject && changes && changes['options']) {
+    if (this.dpObject && changes && changes['options'] && JSON.stringify(changes['options'].currentValue) != JSON.stringify(changes['options'].previousValue)) {
       this.dpObject.options(this.options);
     }
   }
