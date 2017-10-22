@@ -6,12 +6,28 @@ ngx-eonasdan-datetimepicker - is a component wrapper for the [eonasdan-bootstrap
 
 Demo you can find [here](http://tigorc.ru/ngx-eonasdan-datetimepicker-demo/)
 
+### Requirements
+eonasdan-bootstrap-datetimepicker >=4.17.22 <5.0.0
+
 ### Installation
+Include necessary scripts and styles to .angular-cli.json,
+```
+"scripts": [
+  "../node_modules/jquery/dist/jquery.min.js",
+  "../node_modules/moment/min/moment.min.js",
+  "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+  "../node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"
+],
+"styles": [
+  "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+],
+```
 
 Install package:
 
 ```bash
-npm i ngx-eonasdan-datetimepicker --save-dev
+npm i ngx-eonasdan-datetimepicker --save
 ```
 
 Add module in your application:
