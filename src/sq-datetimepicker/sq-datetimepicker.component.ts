@@ -4,24 +4,27 @@ import 'eonasdan-bootstrap-datetimepicker';
 import {
   Component, Input, forwardRef,
   OnInit, OnDestroy, OnChanges, SimpleChanges,
-  ElementRef, Output, EventEmitter
+  ElementRef, Output, EventEmitter, Inject, Optional,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl } from '@angular/forms';
 import {
   SetOptions, Datetimepicker,
   HideEventObject, ChangeEventObject, ErrorEventObject, UpdateEventObject
 } from 'eonasdan-bootstrap-datetimepicker';
+import { SQ_DATETIME_PICKER_OPTIONS, SqDateTimePickerOptions } from './base';
 
 export const SQ_DATETIMEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => SqDatetimepickerComponent),
   multi: true,
-}
+};
+
 export const SQ_DATETIMEPICKER_VALIDATOR: any = {
   provide: NG_VALIDATORS,
   useExisting: forwardRef(() => SqDatetimepickerComponent),
   multi: true,
 };
+
 
 @Component({
   selector: 'sq-datetimepicker',
@@ -59,7 +62,9 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
   private dpObject: Datetimepicker;
   private validModes: string[] = ['input-group', 'input', 'inline'];
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef,
+              @Optional() @Inject(SQ_DATETIME_PICKER_OPTIONS) private defaults: SqDateTimePickerOptions) {
+  }
 
   ngOnInit() {
     if (this.validModes.indexOf(this.mode) === -1) {
@@ -121,7 +126,7 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
       }
     }
     this.dpElement = $(this.el.nativeElement.querySelector(`.sq-datetimepicker-${this.mode}`));
-    let options = Object.assign({}, this.options);
+    let options = Object.assign({}, this.defaults, this.options);
     options.inline = this.mode === 'inline';
     this.dpElement.datetimepicker(options);
     this.dpObject = this.dpElement.data('DateTimePicker');
