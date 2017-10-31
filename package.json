@@ -1,6 +1,6 @@
 {
   "name": "ngx-eonasdan-datetimepicker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Angular 2 datetimepicker component",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
