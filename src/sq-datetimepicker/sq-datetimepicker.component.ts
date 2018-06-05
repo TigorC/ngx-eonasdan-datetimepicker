@@ -31,12 +31,12 @@ export const SQ_DATETIMEPICKER_VALIDATOR: any = {
   template: `
     <div [ngStyle]="style">
       <div class="sq-datetimepicker-input-group input-group date" [ngClass]="groupClass">
-        <input type="text" [ngClass]="inputClass" [readOnly]="readOnly" [placeholder]="placeholder"/>
+        <input type="text" [ngClass]="inputClass" [readOnly]="readOnly" [placeholder]="placeholder" (blur)="onTouched()"/>
         <span class="input-group-addon">
           <span [ngClass]="groupIconClass"></span>
         </span>
       </div>
-      <input type="text" class="sq-datetimepicker-input" [ngClass]="inputClass" [readOnly]="readOnly" [placeholder]="placeholder" />
+      <input type="text" class="sq-datetimepicker-input" [ngClass]="inputClass" [readOnly]="readOnly" [placeholder]="placeholder" (blur)="onTouched()"/>
       <div class="sq-datetimepicker-inline"></div>
     </div>`,
   providers: [SQ_DATETIMEPICKER_VALUE_ACCESSOR, SQ_DATETIMEPICKER_VALIDATOR]
@@ -57,6 +57,7 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
   @Output() dpShow: EventEmitter<any> = new EventEmitter<any>();
   @Output() dpUpdate: EventEmitter<UpdateEventObject> = new EventEmitter<UpdateEventObject>();
 
+  onTouched: Function = () => { };
   private parseError: boolean;
   private dpElement: any;
   private dpObject: Datetimepicker;
@@ -108,8 +109,9 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
     };
   }
 
-  // not used, used for touch input
-  registerOnTouched() { }
+  registerOnTouched(fn: Function) {
+    this.onTouched = fn;
+  }
 
   private onChange(date) {
     // update the form
