@@ -56,6 +56,7 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
   @Output() dpHide: EventEmitter<HideEventObject> = new EventEmitter<HideEventObject>();
   @Output() dpShow: EventEmitter<any> = new EventEmitter<any>();
   @Output() dpUpdate: EventEmitter<UpdateEventObject> = new EventEmitter<UpdateEventObject>();
+  @Output() dpInit: EventEmitter<any> = new EventEmitter<any>();
 
   onTouched: Function = () => { };
   private parseError: boolean;
@@ -76,7 +77,7 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.dpObject && changes && changes['options']) {
+    if (this.dpObject && changes && changes['options'] && JSON.stringify(changes['options'].currentValue) != JSON.stringify(changes['options'].previousValue)) {
       this.dpObject.options(this.options);
     }
   }
@@ -132,6 +133,9 @@ export class SqDatetimepickerComponent implements OnInit, OnChanges, OnDestroy, 
     options.inline = this.mode === 'inline';
     this.dpElement.datetimepicker(options);
     this.dpObject = this.dpElement.data('DateTimePicker');
+    if(this.dpObject){
+      this.dpInit.emit(this.dpObject);
+    }  
     this.bindEvents();
   }
 
